@@ -1,0 +1,83 @@
+[gd_scene load_steps=13 format=3 uid="uid://cr6gdp87redbc"]
+
+[ext_resource type="Script" uid="uid://jwxck0l5wxpb" path="res://ballsplash.gd" id="1_6208b"]
+[ext_resource type="Texture2D" uid="uid://dj5b1xm24gune" path="res://resources/grey-rock-rubble_d.png" id="2_hugns"]
+[ext_resource type="Texture2D" uid="uid://cigocu18r626a" path="res://resources/puff.png" id="2_rj82d"]
+[ext_resource type="Texture2D" uid="uid://dwuxpifq0314x" path="res://resources/grey-rock-rubble_n.png" id="3_cgscc"]
+[ext_resource type="Texture2D" uid="uid://byowt35pknyy6" path="res://resources/grey-rock-rubble.png" id="4_mutdd"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_vwggc"]
+rough = true
+bounce = 0.2
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jbk2j"]
+radius = 70.2567
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_eakov"]
+polygon = PackedVector2Array(264, -410.6, 130.3, -423.5, 120, -423.5, 120, -421, 34.9, -406.5, 30.4, -406.5, -199.3, -333.4, -375.4, -326.5, -382.5, -326.5, -542.5, -76.5, -544.5, -76.5, -606.5, 61.5, -612.2, 61.5, -607.6, 101.9, -615.6, 106.5, -622, 106.5, -636.9, 173, -640, 178.6, -640, 180.7, -574, 286.3, -574, 290.7, -494.1, 346.5, -478, 346.5, -348, 418.4, -348, 423.5, -337.5, 423.5, -280, 417.5, -270.6, 417.5, -267.4, 410.5, -251.3, 410.5, -83, 350.6, 348, 247.5, 353.1, 247.5, 459.1, 200.5, 463.3, 200.5, 561.3, 97.5, 564.7, 97.5, 604.8, -0.5, 606.8, -0.5, 635.8, -113.5, 640, -113.5, 640, -120.3, 616, -227.9, 616, -232.4, 582, -285.5, 582, -289.3, 520, -338.3, 520, -342.2, 264, -408.3)
+
+[sub_resource type="Curve" id="Curve_5nigm"]
+_data = [Vector2(0, 0.56414), 0.0, 1.4, 0, 0, Vector2(1, 0.0145774), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_ucipm"]
+texture_mode = 1
+curve = SubResource("Curve_5nigm")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_1yfxj"]
+particle_flag_disable_z = true
+angular_velocity_min = -160.56
+angular_velocity_max = 30.03
+radial_velocity_min = -29.41
+radial_velocity_max = 14.71
+gravity = Vector3(0, 98, 0)
+scale_min = 0.5
+scale_max = 0.5
+scale_over_velocity_max = 1.0
+alpha_curve = SubResource("CurveTexture_ucipm")
+hue_variation_min = -0.02
+hue_variation_max = 0.02
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_d7sba"]
+diffuse_texture = ExtResource("2_hugns")
+normal_texture = ExtResource("3_cgscc")
+specular_texture = ExtResource("4_mutdd")
+specular_shininess = 0.5
+
+[node name="Ball" type="RigidBody2D" node_paths=PackedStringArray("flightParticles")]
+light_mask = 3
+visibility_layer = 3
+position = Vector2(2799, 1350)
+physics_material_override = SubResource("PhysicsMaterial_vwggc")
+angular_damp = 1.232
+script = ExtResource("1_6208b")
+flightParticles = NodePath("GPUParticles2D")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_jbk2j")
+debug_color = Color(0.844125, 0.278654, 0.653598, 0.42)
+
+[node name="LightOccluder2D2" type="LightOccluder2D" parent="."]
+light_mask = 2
+visibility_layer = 2
+position = Vector2(-3, 0)
+scale = Vector2(0.130469, 0.164404)
+occluder = SubResource("OccluderPolygon2D_eakov")
+occluder_light_mask = 2
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 20
+process_material = SubResource("ParticleProcessMaterial_1yfxj")
+texture = ExtResource("2_rj82d")
+one_shot = true
+randomness = 0.12
+fixed_fps = 60
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-2.00005, 3.43323e-05)
+scale = Vector2(0.51875, 0.646226)
+texture = SubResource("CanvasTexture_d7sba")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

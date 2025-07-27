@@ -1,0 +1,38 @@
+[gd_scene load_steps=3 format=3 uid="uid://l0fy2mtxhbuv"]
+
+[ext_resource type="Texture2D" uid="uid://c7bdi05tjrw83" path="res://resources/panel.png" id="1_2ptgl"]
+[ext_resource type="PackedScene" uid="uid://b7ns42woqhxhg" path="res://hud_upgrade_button.tscn" id="2_5fnsf"]
+
+[node name="NinePatchRect" type="NinePatchRect"]
+offset_left = 353.0
+offset_top = 548.0
+offset_right = 832.0
+offset_bottom = 637.0
+texture = ExtResource("1_2ptgl")
+draw_center = false
+patch_margin_left = 10
+patch_margin_top = 10
+patch_margin_right = 10
+patch_margin_bottom = 10
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 0
+offset_left = -84.0
+offset_top = 4.0
+offset_right = 576.0
+offset_bottom = 88.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer"]
+layout_mode = 2
+
+[node name="UpgradeButton" parent="CenterContainer/HBoxContainer" instance=ExtResource("2_5fnsf")]
+layout_mode = 2
+
+[node name="UpgradeButton2" parent="CenterContainer/HBoxContainer" instance=ExtResource("2_5fnsf")]
+layout_mode = 2
+
+[node name="UpgradeButton3" parent="CenterContainer/HBoxContainer" instance=ExtResource("2_5fnsf")]
+layout_mode = 2
+
+[node name="UpgradeButton4" parent="CenterContainer/HBoxContainer" instance=ExtResource("2_5fnsf")]
+layout_mode = 2

@@ -1,0 +1,19 @@
+# Godot 4+ specific ignores
+.godot/
+/android/
+
+# Zusätzliche Empfehlungen:
+# Export-Dateien
+export_presets.cfg
+*.tmp
+
+# Editor-spezifisch
+.import/
+*.translation
+
+# System-Dateien
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
