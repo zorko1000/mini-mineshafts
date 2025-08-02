@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://c1d2flnu18l2g"]
+
+[ext_resource type="PackedScene" uid="uid://c8p5lmnx1buwt" path="res://scenes/ui/ingame_hud.tscn" id="1_4mn7n"]
+
+[node name="HUD" type="CanvasLayer"]
+
+[node name="NinePatchRect" parent="." instance=ExtResource("1_4mn7n")]

@@ -1,0 +1,135 @@
+[gd_scene load_steps=11 format=3 uid="uid://co5v42b2r6xk6"]
+
+[ext_resource type="Script" uid="uid://bqk5o1jqgw4e4" path="res://scripts/game/level_01.gd" id="1_07gdv"]
+[ext_resource type="PackedScene" uid="uid://cr6gdp87redbc" path="res://scenes/entities/rock.tscn" id="2_28ccf"]
+[ext_resource type="Script" uid="uid://cal8suqo2hmpy" path="res://scripts/utils/polygon_static_body.gd" id="3_g5l7k"]
+[ext_resource type="Script" uid="uid://0gituoe06dj1" path="res://scripts/utils/camera_2d.gd" id="4_cao8v"]
+[ext_resource type="PackedScene" uid="uid://c1d2flnu18l2g" path="res://scenes/ui/hud.tscn" id="5_fnamv"]
+[ext_resource type="Texture2D" uid="uid://btosl37kshvb1" path="res://resources/textures/2d_lights_and_shadows_neutral_point_light.webp" id="6_x1rif"]
+
+[sub_resource type="Gradient" id="Gradient_oht40"]
+colors = PackedColorArray(0.992667, 1, 0.89, 1, 0.6375, 0.71625, 0.75, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_rck27"]
+gradient = SubResource("Gradient_oht40")
+width = 3000
+height = 2000
+fill = 1
+fill_from = Vector2(0.325243, 0)
+fill_to = Vector2(0, 0.631068)
+
+[sub_resource type="Gradient" id="Gradient_y46tk"]
+colors = PackedColorArray(0.439216, 0.439216, 0.407843, 1, 0.44, 0.44, 0.4092, 0.529412)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_ajat7"]
+gradient = SubResource("Gradient_y46tk")
+width = 2560
+
+[node name="Level Base" type="Node2D"]
+script = ExtResource("1_07gdv")
+instantiate_ball = ExtResource("2_28ccf")
+metadata/_edit_horizontal_guides_ = [7002.0]
+metadata/_edit_vertical_guides_ = [8256.0]
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="Sky" type="Polygon2D" parent="ParallaxBackground"]
+position = Vector2(0, -2)
+color = Color(0.495752, 0.598819, 0.659559, 1)
+texture = SubResource("GradientTexture2D_rck27")
+polygon = PackedVector2Array(9, 3935, 3, -2, 8363, 4, 8345, 3917)
+
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.3, 0.3)
+
+[node name="Mountains" type="Polygon2D" parent="ParallaxBackground/ParallaxLayer2"]
+position = Vector2(13, -782)
+color = Color(0.517573, 0.52, 0.4836, 1)
+texture = SubResource("GradientTexture1D_ajat7")
+texture_offset = Vector2(0, 500)
+texture_rotation = -1.52367
+polygon = PackedVector2Array(-12, 1620, 523, 1483, 988, 1443, 1357, 1570, 1640, 1711, 2085, 1898, 2667, 2055, 3298, 2065, 3688, 2181, 4246, 2245, 4521, 2211, 4797, 2029, 4955, 1984, 5162, 1948, 5390, 2019, 5875, 2065, 6244, 1938, 6568, 1832, 6979, 1598, 7599, 1670, 8342, 1822, 8345, 5061, -3, 5052)
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.5, 0.5)
+
+[node name="Mountains" type="Polygon2D" parent="ParallaxBackground/ParallaxLayer"]
+position = Vector2(-13, -422)
+color = Color(0.517573, 0.52, 0.4836, 1)
+texture = SubResource("GradientTexture1D_ajat7")
+texture_offset = Vector2(0, 500)
+texture_rotation = -1.52367
+polygon = PackedVector2Array(9, 1466, 974, 1334, 1639, 1424, 2628, 1951, 2843, 1987, 3029, 1957, 3149, 1892, 3251, 1892, 3371, 1993, 4246, 2245, 4492, 2161, 4797, 2029, 4917, 1904, 5127, 1874, 5409, 1868, 5882, 1922, 6224, 1922, 6505, 1748, 6979, 1598, 7638, 1520, 8345, 1556, 8368, 5018, -3, 5052)
+
+[node name="BaseTerrain" type="Polygon2D" parent="."]
+light_mask = 2
+visibility_layer = 2
+position = Vector2(0, 63)
+scale = Vector2(0.167063, 0.18292)
+color = Color(0.329391, 0.238553, 0.154552, 1)
+polygon = PackedVector2Array(-66, 4992, 5509, 7161, 7773, 7218, 8458, 7884, 11084, 8855, 15993, 8208, 18466, 9045, 22405, 10339, 27238, 12070, 30282, 12032, 32584, 10662, 33840, 10890, 39682, 14030, 42060, 16789, 46170, 18045, 48168, 17969, 49993.1, 19096.6, 49823, 37810.1, -11.9721, 37852.7, -28, 19966)
+script = ExtResource("3_g5l7k")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="BaseTerrain"]
+light_mask = 2
+visibility_layer = 2
+
+[node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("terrain_scene")]
+position = Vector2(3585, 1696)
+zoom = Vector2(0.3, 0.3)
+limit_left = 0
+limit_top = 0
+limit_right = 8250
+limit_bottom = 7000
+script = ExtResource("4_cao8v")
+terrain_scene = NodePath("../BaseTerrain")
+
+[node name="HUD" parent="Camera2D" instance=ExtResource("5_fnamv")]
+
+[node name="Rock" parent="." instance=ExtResource("2_28ccf")]
+mass = 40.02
+
+[node name="Lights" type="Node2D" parent="."]
+
+[node name="DirectionalLight2D" type="DirectionalLight2D" parent="Lights"]
+rotation = -0.886627
+color = Color(0.824001, 0.82592, 0.659622, 1)
+shadow_enabled = true
+shadow_filter = 1
+shadow_filter_smooth = 1.5
+height = 0.25
+
+[node name="DirectionalLight2D2" type="DirectionalLight2D" parent="Lights"]
+light_mask = 2
+visibility_layer = 2
+rotation = -0.886627
+color = Color(0.6586, 0.851433, 0.89, 1)
+range_item_cull_mask = 2
+shadow_enabled = true
+shadow_filter = 1
+shadow_filter_smooth = 1.5
+shadow_item_cull_mask = 2
+height = 0.25
+
+[node name="CanvasModulate" type="CanvasModulate" parent="Lights"]
+light_mask = 3
+visibility_layer = 3
+color = Color(0.63388, 0.656244, 0.650789, 1)
+
+[node name="PointLight2D" type="PointLight2D" parent="Lights"]
+position = Vector2(3219, 1736)
+color = Color(1, 0.598833, 0.17, 1)
+energy = 2.21
+range_item_cull_mask = 3
+shadow_item_cull_mask = 2
+texture = ExtResource("6_x1rif")
+texture_scale = 4.1
+
+[node name="PointLight2D2" type="PointLight2D" parent="Lights"]
+position = Vector2(3244, 1564)
+color = Color(0.571803, 0.00221209, 0.806156, 1)
+energy = 2.21
+range_item_cull_mask = 3
+shadow_item_cull_mask = 2
+texture = ExtResource("6_x1rif")
+texture_scale = 4.1

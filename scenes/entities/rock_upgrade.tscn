@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=3 uid="uid://biukrniqcwo0u"]
+
+[ext_resource type="Script" uid="uid://ba1xksnfexbre" path="res://scripts/entities/rock_upgrade.gd" id="1_bhvam"]
+[ext_resource type="PackedScene" uid="uid://cr6gdp87redbc" path="res://scenes/entities/rock.tscn" id="2_8no0n"]
+[ext_resource type="Texture2D" uid="uid://bkudrgo1pgmta" path="res://resources/textures/grey-rock-rubble-clipart-lg.png" id="3_iy3q1"]
+
+[node name="RockUpgrade" type="Node2D"]
+scale = Vector2(0.165, 0.165)
+script = ExtResource("1_bhvam")
+upgrade_name = "Rock"
+upgrade_description = "Throw a rock at something"
+upgrade_cost = 0
+upgrade_scene = ExtResource("2_8no0n")
+preview_texture = ExtResource("3_iy3q1")

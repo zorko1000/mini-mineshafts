@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=3 uid="uid://el4dgcgoo08u"]
+
+[ext_resource type="Script" uid="uid://cm48j2ck6flyl" path="res://scripts/entities/mineshaft_upgrade.gd" id="1_w4jh5"]
+[ext_resource type="PackedScene" uid="uid://cy6gyvx5mrwek" path="res://scenes/entities/mineshaft.tscn" id="2_qso2o"]
+[ext_resource type="Texture2D" uid="uid://bkudrgo1pgmta" path="res://resources/textures/grey-rock-rubble-clipart-lg.png" id="3_mdxyh"]
+
+[node name="MineshaftUpgrade" type="Node2D"]
+script = ExtResource("1_w4jh5")
+mineshaft_scene = ExtResource("2_qso2o")
+upgrade_name = "Mineshaft"
+upgrade_description = "Add a new shaft"
+upgrade_scene = ExtResource("2_qso2o")
+preview_texture = ExtResource("3_mdxyh")

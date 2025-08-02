@@ -1,0 +1,49 @@
+[gd_scene load_steps=5 format=3 uid="uid://c8p5lmnx1buwt"]
+
+[ext_resource type="Texture2D" uid="uid://c7bdi05tjrw83" path="res://resources/textures/panel.png" id="1_cne07"]
+[ext_resource type="PackedScene" uid="uid://b7ns42woqhxhg" path="res://scenes/ui/hud_upgrade_button.tscn" id="2_xvlew"]
+[ext_resource type="PackedScene" uid="uid://dhk1pc684x8nw" path="res://scenes/entities/mineshaft_upgrade.tscn" id="3_hu5fo"]
+[ext_resource type="PackedScene" uid="uid://biukrniqcwo0u" path="res://scenes/entities/rock_upgrade.tscn" id="4_iobh1"]
+
+[node name="UpgradesPanel" type="NinePatchRect"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -239.5
+offset_top = -89.0
+offset_right = 239.5
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("1_cne07")
+draw_center = false
+patch_margin_left = 10
+patch_margin_top = 10
+patch_margin_right = 10
+patch_margin_bottom = 10
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer"]
+layout_mode = 2
+
+[node name="UpgradeButton" parent="CenterContainer/HBoxContainer" instance=ExtResource("2_xvlew")]
+layout_mode = 2
+upgrade_scene = ExtResource("3_hu5fo")
+
+[node name="UpgradeButton2" parent="CenterContainer/HBoxContainer" instance=ExtResource("2_xvlew")]
+layout_mode = 2
+upgrade_scene = ExtResource("4_iobh1")
+
+[node name="UpgradeButton3" parent="CenterContainer/HBoxContainer" instance=ExtResource("2_xvlew")]
+layout_mode = 2
+
+[node name="UpgradeButton4" parent="CenterContainer/HBoxContainer" instance=ExtResource("2_xvlew")]
+layout_mode = 2
